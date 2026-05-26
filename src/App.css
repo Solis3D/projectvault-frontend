@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+:root {
+  --pv-bg: #131313;
+  --pv-surface: #1c1b1b;
+  --pv-surface-high: #2a2a2a;
+  --pv-text: #e5e2e1;
+  --pv-text-muted: #b9cbc1;
+  --pv-accent: #00ffc2;
+  --pv-accent-dim: #00e1ab;
+  --pv-secondary: #00e3fd;
+  --pv-border: #3a4a43;
+  --pv-danger: #ffb4ab;
+
+  --pv-heading-font: "Space Grotesk", Arial, sans-serif;
+  --pv-body-font: "Geist", Arial, sans-serif;
+  --pv-mono-font: "JetBrains Mono", Consolas, monospace;
+}
+
+body {
+  background-color: var(--pv-bg);
+  color: var(--pv-text);
+  font-family: var(--pv-body-font);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--pv-text);
+  font-family: var(--pv-heading-font);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+p {
+  color: var(--pv-text-muted);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.pv-label {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.75rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.pv-accent {
+  color: var(--pv-accent);
+}
+
+.pv-page-placeholder {
+  display: flex;
+  min-height: 90vh;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--pv-bg);
+}
+
+.pv-navbar {
+  background-color: var(--pv-bg);
+  border-color: var(--pv-surface-high) !important;
+}
+
+.pv-brand {
+  color: var(--pv-text);
+  font-family: var(--pv-heading-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.pv-brand:hover {
+  color: var(--pv-text);
+}
+
+.pv-nav-link {
+  color: var(--pv-text-muted);
+}
+
+.pv-nav-link:hover,
+.pv-nav-link.active {
+  color: var(--pv-text) !important;
+}
+
+.pv-nav-link.active {
+  border-bottom: 2px solid var(--pv-accent);
+}
+
+.pv-btn-primary {
+  background-color: var(--pv-accent);
+  color: #002116;
+}
+
+.pv-btn-primary:hover {
+  background-color: var(--pv-accent-dim);
+  color: #002116;
+}
+
+.pv-btn-primary.active {
+  background-color: var(--pv-accent-dim);
+}
