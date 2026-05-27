@@ -113,3 +113,153 @@ textarea {
 .pv-btn-primary.active {
   background-color: var(--pv-accent-dim);
 }
+
+.pv-hero {
+  min-height: clamp(560px, 80vh, 720px);
+}
+
+.pv-hero-image {
+  object-fit: cover;
+  object-position: center;
+}
+
+.pv-hero-overlay {
+  background: linear-gradient(180deg, rgba(19, 19, 19, 0.36) 0%, rgba(19, 19, 19, 0.68) 62%, var(--pv-bg) 100%), rgba(19, 19, 19, 0.18);
+}
+
+.pv-hero-content {
+  max-width: 780px;
+}
+
+.pv-hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+.pv-hero-subtitle {
+  font-size: 2.25rem;
+  font-weight: 600;
+}
+
+.pv-hero-description {
+  max-width: 650px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.pv-btn-secondary {
+  border: 1px solid var(--pv-border);
+  background-color: transparent;
+  color: var(--pv-text);
+}
+
+.pv-btn-secondary:hover {
+  border-color: var(--pv-accent);
+  background-color: transparent;
+  color: var(--pv-accent);
+}
+
+.pv-featured {
+  background-color: var(--pv-bg);
+}
+
+.pv-featured h2 {
+  font-size: 2rem;
+}
+
+.pv-featured-link {
+  color: var(--pv-text);
+  font-weight: 500;
+}
+
+.pv-featured-link:hover {
+  color: var(--pv-accent);
+}
+
+.pv-spinner {
+  color: var(--pv-accent);
+}
+
+.pv-featured-empty {
+  border: 1px solid var(--pv-surface-high);
+  color: var(--pv-text-muted);
+}
+
+.pv-project-card {
+  overflow: hidden;
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-surface);
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.pv-project-card:hover {
+  border-color: var(--pv-accent);
+  transform: translateY(-3px);
+}
+
+.pv-project-card-image,
+.pv-project-card-placeholder {
+  height: 245px;
+}
+
+.pv-project-card-image {
+  object-fit: cover;
+}
+
+.pv-project-card-placeholder {
+  background-color: var(--pv-surface-high);
+  color: var(--pv-text-muted);
+}
+
+.pv-project-card-title {
+  font-size: 1.35rem;
+}
+
+.pv-project-tag,
+.pv-project-status {
+  font-family: var(--pv-mono-font);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.pv-project-tag {
+  padding: 0.35rem 0.55rem;
+  background-color: var(--pv-surface-high);
+  color: var(--pv-text-muted);
+}
+
+.pv-project-status {
+  color: var(--pv-accent);
+}
+
+.pv-footer {
+  border-top: 1px solid var(--pv-surface-high);
+  background-color: #101010;
+}
+
+.pv-footer-link {
+  color: var(--pv-text-muted);
+  font-size: 0.85rem;
+}
+
+.pv-footer-copy {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 767px) {
+  .pv-hero-title {
+    font-size: 2.75rem;
+  }
+
+  .pv-hero-subtitle {
+    font-size: 1.6rem;
+  }
+
+  .pv-hero-description {
+    font-size: 1rem;
+  }
+}
