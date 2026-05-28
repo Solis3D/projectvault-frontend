@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import API_URL from "../config/api";
+import ProjectCard from "./ProjectCard";
 
 const FeaturedProjects = function () {
   const [featuredProjects, setFeaturedProjects] = useState([]);
@@ -63,26 +64,7 @@ const FeaturedProjects = function () {
           <Row className="g-4">
             {featuredProjects.map((project) => (
               <Col xs={12} md={4} key={project.id}>
-                <Link to={`/projects/${project.id}`} className="pv-project-card d-block h-100">
-                  {project.thumbnailUrl ? (
-                    <img src={project.thumbnailUrl} alt={project.title} className="pv-project-card-image w-100" />
-                  ) : (
-                    <div className="pv-project-card-placeholder d-flex align-items-center justify-content-center">
-                      <ImageOff size={32} />
-                    </div>
-                  )}
-
-                  <div className="p-4">
-                    <h3 className="pv-project-card-title mb-2">{project.title}</h3>
-
-                    <p className="mb-4">by {project.ownerUsername}</p>
-
-                    <div className="d-flex justify-content-between align-items-center gap-2">
-                      <span className="pv-project-tag">{project.categoryName}</span>
-                      <span className="pv-project-status">{project.projectStatus}</span>
-                    </div>
-                  </div>
-                </Link>
+                <ProjectCard project={project} />
               </Col>
             ))}
           </Row>
