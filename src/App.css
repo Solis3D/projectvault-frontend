@@ -287,6 +287,26 @@ textarea {
   color: var(--pv-text-muted);
 }
 
+.pv-category-filter {
+  max-width: 980px;
+}
+
+.pv-filter-pill {
+  border: 1px solid var(--pv-border);
+  background-color: transparent;
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.75rem;
+  padding: 0.65rem 1rem;
+  text-transform: uppercase;
+}
+
+.pv-filter-pill:hover,
+.pv-filter-pill.active {
+  border-color: var(--pv-accent);
+  color: var(--pv-accent);
+}
+
 @media (max-width: 767px) {
   .pv-hero-title {
     font-size: 2.75rem;
