@@ -76,6 +76,12 @@ textarea {
   border-color: var(--pv-surface-high) !important;
 }
 
+.pv-navbar-user {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.82rem;
+}
+
 .pv-brand {
   color: var(--pv-text);
   font-family: var(--pv-heading-font);
@@ -284,7 +290,7 @@ textarea {
 }
 
 .pv-form-control::placeholder {
-  color: var(--pv-text-muted);
+  color: rgba(185, 203, 193, 0.45);
 }
 
 .pv-category-filter {
@@ -464,6 +470,31 @@ textarea {
   width: 16px;
   height: 16px;
   object-fit: contain;
+}
+
+.pv-auth-page {
+  min-height: 80vh;
+  background: linear-gradient(180deg, rgba(19, 19, 19, 0.75), var(--pv-bg)), var(--pv-bg);
+}
+
+.pv-auth-panel {
+  border: 1px solid var(--pv-surface-high);
+  background-color: rgba(28, 27, 27, 0.92);
+}
+
+.pv-auth-panel label {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.pv-inline-link {
+  color: var(--pv-accent);
+}
+
+.pv-inline-link:hover {
+  color: var(--pv-accent-dim);
 }
 
 @media (max-width: 767px) {

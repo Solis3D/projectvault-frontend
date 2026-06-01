@@ -5,8 +5,11 @@ import heroImage from "../assets/images/hero-vault.png";
 import MyNavbar from "./MyNavbar";
 import FeaturedProjects from "./FeaturedProjects";
 import MyFooter from "./MyFooter";
+import useAuth from "../hooks/useAuth";
 
 const Home = function () {
+  const { isAuthenticated } = useAuth();
+
   return (
     <>
       <MyNavbar />
@@ -33,8 +36,8 @@ const Home = function () {
                 Explore Gallery <ArrowRight size={18} className="ms-2" />
               </Button>
 
-              <Button as={Link} to="/register" className="pv-btn-secondary rounded-0 px-4 py-3">
-                Create Your Portfolio
+              <Button as={Link} to={isAuthenticated ? "/portfolio" : "/register"} className="pv-btn-secondary rounded-0 px-4 py-3">
+                {isAuthenticated ? "Go to Portfolio" : "Create Your Portfolio"}
               </Button>
             </div>
           </div>
