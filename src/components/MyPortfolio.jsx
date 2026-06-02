@@ -24,6 +24,12 @@ const MyPortfolio = function () {
   const [profileError, setProfileError] = useState("");
   const [profileSuccess, setProfileSuccess] = useState("");
 
+  const [avatarFile, setAvatarFile] = useState(null);
+  const [avatarPreview, setAvatarPreview] = useState("");
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+  const [avatarError, setAvatarError] = useState("");
+  const [avatarSuccess, setAvatarSuccess] = useState("");
+
   const isProfileIncomplete = !currentUser?.avatarUrl || !currentUser?.position || !currentUser?.bio;
 
   useEffect(() => {
@@ -74,10 +80,18 @@ const MyPortfolio = function () {
 
     setProfileError("");
     setProfileSuccess("");
+    setAvatarFile(null);
+    setAvatarPreview("");
+    setAvatarError("");
+    setAvatarSuccess("");
     setIsEditingProfile(true);
   };
 
   const closeProfileEditor = function () {
+    setAvatarFile(null);
+    setAvatarPreview("");
+    setAvatarError("");
+    setAvatarSuccess("");
     setIsEditingProfile(false);
     setProfileError("");
     setProfileSuccess("");
@@ -117,11 +131,67 @@ const MyPortfolio = function () {
     }
   };
 
+  const handleAvatarChange = function (event) {
+    const file = event.target.files[0];
+
+    setAvatarError("");
+    setAvatarSuccess("");
+
+    if (!file) {
+      setAvatarFile(null);
+      setAvatarPreview("");
+      return;
+    }
+
+    setAvatarFile(file);
+    setAvatarPreview(URL.createObjectURL(file));
+  };
+
+  const handleAvatarUpload = async function () {
+    if (!avatarFile) {
+      setAvatarError("Select an image before uploading.");
+      return;
+    }
+
+    try {
+      setIsUploadingAvatar(true);
+      setAvatarError("");
+      setAvatarSuccess("");
+
+      const formData = new FormData();
+      formData.append("file", avatarFile);
+
+      const response = await fetch(`${API_URL}/users/me/avatar`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Avatar upload failed.");
+      }
+
+      const updatedUser = await response.json();
+
+      updateCurrentUser(updatedUser);
+      setAvatarSuccess("Avatar updated successfully.");
+      setAvatarFile(null);
+      setAvatarPreview("");
+    } catch (error) {
+      setAvatarError(error.message);
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  };
+
   return (
     <>
       <MyNavbar />
 
-      <section className="pv-portfolio py5">
+      <section className="pv-portfolio py-5">
         <Container className=" py-md-4">
           <div className="pv-portfolio-header p-4 p-md-5 mb-4">
             <Row className=" align-items-center g-4">
@@ -181,6 +251,30 @@ const MyPortfolio = function () {
             <div className="pv-portfolio-panel p-4 mb-5">
               <p className="pv-label mb-2">Profile Editor</p>
               <h2 className="mb-4">Edit your artist profile</h2>
+
+              <div className="pv-avatar-editor d-flex flex-column flex-md-row align-items-md-center gap-4 mb-4">
+                {avatarPreview ? (
+                  <img src={avatarPreview} alt="Avatar preview" className="pv-profile-avatar" />
+                ) : currentUser?.avatarUrl ? (
+                  <img src={currentUser.avatarUrl} alt={currentUser.username} className="pv-profile-avatar" />
+                ) : (
+                  <div className="pv-profile-avatar-placeholder d-flex align-items-center justify-content-center">
+                    <UserRound size={42} />
+                  </div>
+                )}
+
+                <div className="flex-grow-1">
+                  <label className="pv-form-label">Avatar</label>
+                  <input type="file" accept="image/*" onChange={handleAvatarChange} className="pv-form-control form-control rounded-0 mb-3" />
+
+                  {avatarError && <p className="pv-form-error mb-2">{avatarError}</p>}
+                  {avatarSuccess && <p className="pv-form-success mb-2">{avatarSuccess}</p>}
+
+                  <Button type="button" className="pv-btn-secondary rounded-0 px-4 py-2" onClick={handleAvatarUpload} disabled={isUploadingAvatar}>
+                    {isUploadingAvatar ? "Uploading..." : "Upload Avatar"}
+                  </Button>
+                </div>
+              </div>
 
               {profileError && <p className="pv-form-error">{profileError}</p>}
               {profileSuccess && <p className="pv-form-success">{profileSuccess}</p>}

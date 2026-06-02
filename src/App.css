@@ -555,6 +555,11 @@ textarea {
   color: var(--pv-accent);
 }
 
+.pv-avatar-editor {
+  border-bottom: 1px solid var(--pv-surface-high);
+  padding-bottom: 1.5rem;
+}
+
 @media (max-width: 767px) {
   .pv-hero-title {
     font-size: 2.75rem;
