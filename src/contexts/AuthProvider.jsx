@@ -8,6 +8,11 @@ const AuthProvider = function ({ children }) {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
+  const updateCurrentUser = function (userData) {
+    localStorage.setItem("projectvault_user", JSON.stringify(userData));
+    setCurrentUser(userData);
+  };
+
   const login = function (newToken, userData) {
     localStorage.setItem("projectvault_token", newToken);
     localStorage.setItem("projectvault_user", JSON.stringify(userData));
@@ -32,6 +37,7 @@ const AuthProvider = function ({ children }) {
         isAuthenticated: Boolean(token),
         login,
         logout,
+        updateCurrentUser,
       }}
     >
       {children}

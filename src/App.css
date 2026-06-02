@@ -497,6 +497,64 @@ textarea {
   color: var(--pv-accent-dim);
 }
 
+.pv-portfolio {
+  min-height: 80vh;
+  background-color: var(--pv-bg);
+}
+
+.pv-portfolio-header,
+.pv-complete-profile,
+.pv-portfolio-panel,
+.pv-portfolio-empty,
+.pv-portfolio-project-card {
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-surface);
+}
+
+.pv-profile-avatar,
+.pv-profile-avatar-placeholder {
+  width: 118px;
+  height: 118px;
+}
+
+.pv-profile-avatar {
+  object-fit: cover;
+  border: 1px solid var(--pv-border);
+}
+
+.pv-profile-avatar-placeholder {
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-surface-high);
+  color: var(--pv-text-muted);
+}
+
+.pv-complete-profile {
+  border-color: var(--pv-border);
+}
+
+.pv-portfolio-empty {
+  color: var(--pv-text-muted);
+}
+
+.pv-portfolio-project-card {
+  overflow: hidden;
+}
+
+.pv-form-label {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.pv-form-error {
+  color: var(--pv-danger);
+}
+
+.pv-form-success {
+  color: var(--pv-accent);
+}
+
 @media (max-width: 767px) {
   .pv-hero-title {
     font-size: 2.75rem;
