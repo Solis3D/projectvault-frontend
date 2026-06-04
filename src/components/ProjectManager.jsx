@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Modal, Row, Spinner } from "react-bootstrap";
 import { ArrowLeft, Globe2, ImageOff, LockKeyhole, Pencil, Trash2 } from "lucide-react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import API_URL from "../config/api";
 import useAuth from "../hooks/useAuth";
 import MyFooter from "./MyFooter";
@@ -12,6 +12,7 @@ import ProjectEmbedSettings from "./ProjectEmbedSettings";
 
 const ProjectManager = function () {
   const { projectId } = useParams();
+  const navigate = useNavigate();
   const { token } = useAuth();
 
   const [project, setProject] = useState(null);
@@ -24,6 +25,9 @@ const ProjectManager = function () {
   const [deletingImageId, setDeletingImageId] = useState(null);
   const [mediaError, setMediaError] = useState("");
   const [imageToDelete, setImageToDelete] = useState(null);
+  const [isProjectDeleteModalOpen, setIsProjectDeleteModalOpen] = useState(false);
+  const [isDeletingProject, setIsDeletingProject] = useState(false);
+  const [projectDeleteError, setProjectDeleteError] = useState("");
 
   const mainImages = images.filter((image) => image.imageType === "MAIN");
   const galleryImages = images.filter((image) => image.imageType === "GALLERY");
@@ -166,6 +170,41 @@ const ProjectManager = function () {
     }
   };
 
+  const openDeleteProjectModal = function () {
+    setProjectDeleteError("");
+    setIsProjectDeleteModalOpen(true);
+  };
+
+  const closeDeleteProjectModal = function () {
+    setIsProjectDeleteModalOpen(false);
+    setProjectDeleteError("");
+  };
+
+  const confirmProjectDelete = async function () {
+    try {
+      setIsDeletingProject(true);
+      setProjectDeleteError("");
+
+      const response = await fetch(`${API_URL}/projects/${project.id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.errors?.join(" ") || errorData.message || "Unable to delete project.");
+      }
+
+      navigate("/portfolio");
+    } catch (error) {
+      setProjectDeleteError(error.message);
+    } finally {
+      setIsDeletingProject(false);
+    }
+  };
+
   const renderMediaSection = function (title, description, sectionImages) {
     return (
       <div className="pv-media-section mb-4">
@@ -301,6 +340,16 @@ const ProjectManager = function () {
                     <p className="mb-2">Gallery images: {galleryImages.length}</p>
                     <p className="mb-0">Timelapse frames: {timelapseImages.length}</p>
                   </div>
+                  <div className="pv-danger-zone p-4 mt-4">
+                    <p className="pv-panel-label mb-3">Danger Zone</p>
+                    <h2 className="mb-3">Delete Project</h2>
+                    <p className="mb-4">Delete this project and all its media permanently.</p>
+
+                    <Button type="button" className="pv-btn-danger rounded-0 px-4 py-2" onClick={openDeleteProjectModal}>
+                      <Trash2 size={16} className="me-2" />
+                      Delete Project
+                    </Button>
+                  </div>
                 </Col>
               </Row>
             </>
@@ -335,6 +384,32 @@ const ProjectManager = function () {
 
             <Button type="button" className="pv-btn-danger rounded-0 px-4 py-2" onClick={confirmImageDelete} disabled={deletingImageId === imageToDelete.id}>
               {deletingImageId === imageToDelete.id ? "Deleting..." : "Delete Image"}
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      )}
+
+      {isProjectDeleteModalOpen && (
+        <Modal show centered onHide={closeDeleteProjectModal} contentClassName="pv-project-form-modal">
+          <Modal.Header closeButton closeVariant="white">
+            <Modal.Title>Delete Project</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <p className="mb-2">Are you sure you want to delete this project?</p>
+            <h3 className="mb-3">{project.title}</h3>
+            <p className="pv-form-error mb-0">This action cannot be undone. All project media will be removed too.</p>
+
+            {projectDeleteError && <p className="pv-form-error mt-3 mb-0">{projectDeleteError}</p>}
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button type="button" className="pv-btn-secondary rounded-0 px-4 py-2" onClick={closeDeleteProjectModal}>
+              Cancel
+            </Button>
+
+            <Button type="button" className="pv-btn-danger rounded-0 px-4 py-2" onClick={confirmProjectDelete} disabled={isDeletingProject}>
+              {isDeletingProject ? "Deleting..." : "Delete Project"}
             </Button>
           </Modal.Footer>
         </Modal>

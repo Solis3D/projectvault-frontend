@@ -1057,6 +1057,16 @@ textarea {
   flex-shrink: 0;
 }
 
+.pv-danger-zone {
+  border: 1px solid rgba(255, 180, 171, 0.45);
+  border-radius: 8px;
+  background-color: rgba(255, 90, 90, 0.06);
+}
+
+.pv-danger-zone h2 {
+  font-size: 1.25rem;
+}
+
 @media (max-width: 991px) {
   .pv-admin-project-row {
     grid-template-columns: 76px 1fr;
