@@ -886,6 +886,189 @@ textarea {
   height: 100%;
   border: 0;
 }
+
+.pv-admin {
+  min-height: 80vh;
+  background-color: var(--pv-bg);
+}
+
+.pv-admin-stat,
+.pv-admin-panel,
+.pv-admin-user {
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-surface);
+}
+
+.pv-admin-stat svg {
+  color: var(--pv-accent);
+}
+
+.pv-admin-stat h2 {
+  font-size: 2.4rem;
+  color: var(--pv-accent);
+}
+
+.pv-admin-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pv-admin-project-row {
+  display: grid;
+  grid-template-columns: 76px 1.4fr auto auto auto auto;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-bg);
+  padding: 0.85rem;
+}
+
+.pv-admin-project-row h3,
+.pv-admin-user h3 {
+  font-size: 1rem;
+}
+
+.pv-admin-thumb,
+.pv-admin-thumb-placeholder {
+  width: 76px;
+  height: 54px;
+}
+
+.pv-admin-thumb {
+  object-fit: cover;
+  border: 1px solid var(--pv-border);
+}
+
+.pv-admin-thumb-placeholder {
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-surface-high);
+  color: var(--pv-text-muted);
+}
+
+.pv-admin-featured.active {
+  border-color: var(--pv-accent);
+  color: var(--pv-accent);
+}
+
+.pv-admin-user {
+  border-color: var(--pv-surface-high);
+}
+
+.pv-admin-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--pv-border);
+  background-color: transparent;
+  color: var(--pv-text-muted);
+  padding: 0;
+}
+
+.pv-admin-action:hover,
+.pv-admin-action.active {
+  border-color: var(--pv-accent);
+  background-color: rgba(0, 255, 194, 0.1);
+  color: var(--pv-accent);
+}
+
+.pv-admin-action.danger:hover {
+  border-color: var(--pv-danger);
+  background-color: rgba(255, 90, 90, 0.12);
+  color: var(--pv-danger);
+}
+
+.pv-admin-featured-switch {
+  min-width: 120px;
+  margin-bottom: 0;
+  padding-left: 2.75rem;
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.pv-admin-featured-switch .form-check-input {
+  width: 2.2rem;
+  height: 1.1rem;
+  margin-left: -2.75rem;
+  border-color: var(--pv-border);
+  background-color: var(--pv-surface-high);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.pv-admin-featured-switch .form-check-input:checked {
+  border-color: var(--pv-accent);
+  background-color: var(--pv-accent);
+}
+
+.pv-admin-featured-switch .form-check-input:focus {
+  border-color: var(--pv-accent);
+  box-shadow: none;
+}
+
+.pv-admin-featured-switch .form-check-label {
+  cursor: pointer;
+}
+
+.pv-admin-catalog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 420px;
+  overflow-y: auto;
+}
+
+.pv-admin-catalog-item {
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-bg);
+  padding: 1rem;
+}
+
+.pv-admin-catalog-item h3 {
+  font-size: 1rem;
+}
+
+.pv-admin-catalog-item p {
+  font-size: 0.9rem;
+}
+
+.pv-admin-catalog-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid var(--pv-surface-high);
+  background-color: var(--pv-bg);
+  padding: 1rem;
+}
+
+.pv-admin-catalog-form {
+  min-height: 245px;
+}
+
+.pv-admin-software-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+@media (max-width: 991px) {
+  .pv-admin-project-row {
+    grid-template-columns: 76px 1fr;
+  }
+
+  .pv-admin-project-row .pv-project-tag,
+  .pv-admin-project-row .pv-project-status,
+  .pv-admin-featured {
+    width: fit-content;
+  }
+}
+
 @media (max-width: 767px) {
   .pv-hero-title {
     font-size: 2.75rem;
