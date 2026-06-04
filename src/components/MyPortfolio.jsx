@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import API_URL from "../config/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MyNavbar from "./MyNavbar";
 import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { ImageOff, Plus, UserRound } from "lucide-react";
 import MyFooter from "./MyFooter";
+import ProjectForm from "./ProjectForm";
 
 const MyPortfolio = function () {
+  const navigate = useNavigate();
   const { currentUser, token, updateCurrentUser } = useAuth();
   const [projects, setProjects] = useState([]);
   const [isLoadingProjects, setIsLoadingProjects] = useState(true);
@@ -29,6 +31,7 @@ const MyPortfolio = function () {
   const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
   const [avatarError, setAvatarError] = useState("");
   const [avatarSuccess, setAvatarSuccess] = useState("");
+  const [isProjectFormOpen, setIsProjectFormOpen] = useState(false);
 
   const isProfileIncomplete = !currentUser?.avatarUrl || !currentUser?.position || !currentUser?.bio;
 
@@ -187,6 +190,18 @@ const MyPortfolio = function () {
     }
   };
 
+  const openCreateProjectForm = function () {
+    setIsProjectFormOpen(true);
+  };
+
+  const closeProjectForm = function () {
+    setIsProjectFormOpen(false);
+  };
+
+  const handleProjectCreated = function (savedProject) {
+    navigate(`/portfolio/projects/${savedProject.id}/manage`);
+  };
+
   return (
     <>
       <MyNavbar />
@@ -220,7 +235,7 @@ const MyPortfolio = function () {
                     Edit Profile
                   </Button>
 
-                  <Button className="pv-btn-primary border-0 rounded-0 px-4 py-3">
+                  <Button className="pv-btn-primary border-0 rounded-0 px-4 py-3" onClick={openCreateProjectForm}>
                     <Plus size={18} className="me-2" />
                     Create Project
                   </Button>
@@ -405,7 +420,9 @@ const MyPortfolio = function () {
                           </Button>
                         )}
 
-                        <Button className="pv-btn-primary border-0 rounded-0 px-3 py-2">Manage</Button>
+                        <Button as={Link} to={`/portfolio/projects/${project.id}/manage`} className="pv-btn-primary border-0 rounded-0 px-3 py-2">
+                          Manage
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -415,6 +432,8 @@ const MyPortfolio = function () {
           )}
         </Container>
       </section>
+
+      {isProjectFormOpen && <ProjectForm onHide={closeProjectForm} onSaved={handleProjectCreated} />}
 
       <MyFooter />
     </>

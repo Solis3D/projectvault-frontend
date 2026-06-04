@@ -12,6 +12,7 @@ import NotFound from "./components/NotFound";
 import AuthProvider from "./contexts/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
+import ProjectManager from "./components/ProjectManager";
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
                 element={
                   <ProtectedRoute>
                     <MyPortfolio />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/portfolio/projects/:projectId/manage"
+                element={
+                  <ProtectedRoute>
+                    <ProjectManager />
                   </ProtectedRoute>
                 }
               />
