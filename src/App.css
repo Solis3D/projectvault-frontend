@@ -23,6 +23,23 @@ body {
   font-family: var(--pv-body-font);
 }
 
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--pv-bg);
+  color: var(--pv-text);
+  font-family: var(--pv-body-font);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -278,6 +295,7 @@ textarea {
 }
 
 .pv-footer {
+  margin-top: auto;
   border-top: 1px solid var(--pv-surface-high);
   background-color: #101010;
 }
