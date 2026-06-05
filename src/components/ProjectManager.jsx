@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Modal, Row, Spinner } from "react-bootstrap";
-import { ArrowLeft, Globe2, ImageOff, LockKeyhole, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, EyeIcon, Globe2, ImageOff, Lock, LockKeyhole, Pencil, Trash2 } from "lucide-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import API_URL from "../config/api";
 import useAuth from "../hooks/useAuth";
@@ -289,10 +289,22 @@ const ProjectManager = function () {
 
                   <Col xs={12} md="auto">
                     <div className="d-flex flex-column flex-sm-row gap-3">
-                      <Button className="pv-btn-secondary rounded-0 px-4 py-3" onClick={() => setIsEditingDetails(true)}>
+                      <Button className="pv-btn-secondary rounded-0 px-3 py-3" onClick={() => setIsEditingDetails(true)}>
                         <Pencil size={18} className="me-2" />
                         Edit Details
                       </Button>
+
+                      {isPublic ? (
+                        <Button as={Link} to={`/projects/${project.id}`} className="pv-btn-secondary rounded-0 px-3 py-3">
+                          <EyeIcon size={18} className=" me-2" />
+                          View Project
+                        </Button>
+                      ) : (
+                        <Button type="button" className="pv-btn-muted rounded-0 px-3 py-3" disabled>
+                          <Lock size={18} className=" me-2" />
+                          Private Draft
+                        </Button>
+                      )}
 
                       <Button
                         className={isPublic ? "pv-btn-secondary rounded-0 px-4 py-3" : "pv-btn-primary border-0 rounded-0 px-4 py-3"}
