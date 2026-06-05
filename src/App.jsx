@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <div className="d-flex flex-column min-vh-100">
-          <main className="flex-grow-1">
+          <main className="flex-grow-1 d-flex flex-column">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/gallery" element={<Gallery />} />
