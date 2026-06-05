@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const MyFooter = function () {
   return (
-    <footer className="pv-footer py-4 mt-5">
+    <footer className="pv-footer py-4">
       <Container className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
         <Link to="/" className="pv-brand">
           Project<span className="pv-accent">Vault</span>

@@ -295,7 +295,7 @@ textarea {
 }
 
 .pv-footer {
-  margin-top: auto;
+  margin-top: auto !important;
   border-top: 1px solid var(--pv-surface-high);
   background-color: #101010;
 }
