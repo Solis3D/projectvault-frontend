@@ -223,13 +223,15 @@ const ProjectDetail = function () {
                       <span>Category</span>
 
                       <div>
-                        {project.ownerAvatarUrl && <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar" />}
                         <strong>{project.categoryName}</strong>
                       </div>
                     </div>
 
                     <div className="pv-detail-info-row">
                       <span>Artist</span>
+                      {project.ownerAvatarUrl && (
+                        <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-2" />
+                      )}
                       <strong>{project.ownerUsername}</strong>
                     </div>
 
