@@ -120,6 +120,20 @@ textarea {
   background-color: var(--pv-accent-dim);
 }
 
+.pv-btn-muted {
+  border: 1px solid var(--pv-surface-high);
+  background-color: transparent;
+  color: rgba(185, 203, 193, 0.45);
+  cursor: not-allowed;
+}
+
+.pv-btn-muted:disabled {
+  border-color: var(--pv-surface-high);
+  background-color: transparent;
+  color: rgba(185, 203, 193, 0.45);
+  opacity: 1;
+}
+
 .pv-hero {
   min-height: clamp(560px, 80vh, 720px);
 }
@@ -223,10 +237,33 @@ textarea {
   font-size: 1.35rem;
 }
 
-.pv-project-tag,
-.pv-project-status {
+.pv-project-card-featured {
+  border-color: rgba(0, 255, 194, 0.65);
+  box-shadow: 0 0 0 1px rgba(0, 255, 194, 0.08);
+}
+
+.pv-featured-badge {
+  position: absolute;
+  top: 0.85rem;
+  left: 0.85rem;
+  border: 1px solid var(--pv-accent);
+  background-color: rgba(19, 19, 19, 0.82);
+  color: var(--pv-accent);
   font-family: var(--pv-mono-font);
   font-size: 0.72rem;
+  line-height: 1;
+  padding: 0.45rem 0.65rem;
+  text-transform: uppercase;
+}
+
+.pv-project-tag,
+.pv-project-status {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  font-family: var(--pv-mono-font);
+  font-size: 0.72rem;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -257,7 +294,7 @@ textarea {
 }
 
 .pv-gallery {
-  min-height: 80vh;
+  min-height: calc(100vh - 170px);
   background-color: var(--pv-bg);
 }
 
@@ -430,10 +467,38 @@ textarea {
   background-color: var(--pv-surface);
 }
 
+.pv-timelapse-image-stack {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background-color: var(--pv-surface);
+  line-height: 0;
+}
+
 .pv-timelapse-image {
+  display: block;
   width: 100%;
   max-height: 720px;
   object-fit: contain;
+}
+
+.pv-timelapse-image-previous {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  max-height: none;
+  pointer-events: none;
+  animation: pv-timelapse-crossfade-out 0.22s ease-in-out forwards;
+}
+
+@keyframes pv-timelapse-crossfade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }
 
 .pv-timelapse-control {
@@ -665,6 +730,7 @@ textarea {
 
 .pv-profile-avatar {
   object-fit: cover;
+  object-position: center 20%;
   border: 1px solid var(--pv-border);
 }
 
