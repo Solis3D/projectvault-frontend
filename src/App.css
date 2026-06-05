@@ -452,6 +452,19 @@ textarea {
   line-height: 1.75;
 }
 
+.pv-detail-artist {
+  text-align: right;
+}
+
+.pv-detail-artist-avatar {
+  width: 32px;
+  height: 32px;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-surface-high);
+}
+
 .pv-image-button {
   display: block;
   width: 100%;

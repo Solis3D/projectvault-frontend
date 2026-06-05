@@ -221,7 +221,11 @@ const ProjectDetail = function () {
 
                     <div className="pv-detail-info-row">
                       <span>Category</span>
-                      <strong>{project.categoryName}</strong>
+
+                      <div>
+                        {project.ownerAvatarUrl && <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar" />}
+                        <strong>{project.categoryName}</strong>
+                      </div>
                     </div>
 
                     <div className="pv-detail-info-row">
