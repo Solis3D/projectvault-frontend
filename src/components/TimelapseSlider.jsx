@@ -1,27 +1,72 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ChevronLeft, ChevronRight, ImageOff } from "lucide-react";
 
 const TimelapseSlider = function ({ images, projectTitle, onImageClick }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [previousImage, setPreviousImage] = useState(null);
+  const [isCrossfading, setIsCrossfading] = useState(false);
+  const crossfadeTimeoutRef = useRef(null);
+
+  const safeActiveIndex = activeIndex >= images.length ? images.length - 1 : activeIndex;
+  const activeImage = images[safeActiveIndex];
+
+  useEffect(() => {
+    images.forEach((image) => {
+      if (image.imageUrl) {
+        const preloadedImage = new Image();
+        preloadedImage.src = image.imageUrl;
+      }
+    });
+  }, [images]);
+
+  useEffect(() => {
+    return () => {
+      if (crossfadeTimeoutRef.current) {
+        clearTimeout(crossfadeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   if (images.length === 0) {
     return null;
   }
 
-  const safeActiveIndex = activeIndex >= images.length ? images.length - 1 : activeIndex;
-  const activeImage = images[safeActiveIndex];
+  const changeFrame = function (nextIndex, withCrossfade = true) {
+    if (nextIndex === safeActiveIndex) {
+      return;
+    }
+
+    if (crossfadeTimeoutRef.current) {
+      clearTimeout(crossfadeTimeoutRef.current);
+    }
+
+    if (withCrossfade && activeImage?.imageUrl) {
+      setPreviousImage(activeImage);
+      setIsCrossfading(true);
+
+      crossfadeTimeoutRef.current = setTimeout(() => {
+        setPreviousImage(null);
+        setIsCrossfading(false);
+      }, 220);
+    } else {
+      setPreviousImage(null);
+      setIsCrossfading(false);
+    }
+
+    setActiveIndex(nextIndex);
+  };
 
   const goToPrevious = function () {
-    setActiveIndex((currentIndex) => (currentIndex === 0 ? images.length - 1 : currentIndex - 1));
+    changeFrame(safeActiveIndex === 0 ? images.length - 1 : safeActiveIndex - 1);
   };
 
   const goToNext = function () {
-    setActiveIndex((currentIndex) => (currentIndex >= images.length - 1 ? 0 : currentIndex + 1));
+    changeFrame(safeActiveIndex >= images.length - 1 ? 0 : safeActiveIndex + 1);
   };
 
   const handleSliderChange = function (event) {
-    setActiveIndex(Number(event.target.value));
+    changeFrame(Number(event.target.value), false);
   };
 
   return (
@@ -33,8 +78,14 @@ const TimelapseSlider = function ({ images, projectTitle, onImageClick }) {
 
       <div className="pv-timelapse-viewer">
         {activeImage?.imageUrl ? (
-          <button type="button" className="pv-image-button" onClick={() => onImageClick(activeImage)}>
-            <img src={activeImage.imageUrl} alt={activeImage.caption || activeImage.stageLabel || projectTitle} className="pv-timelapse-image" />
+          <button type="button" className="pv-image-button pv-timelapse-image-button" onClick={() => onImageClick(activeImage)}>
+            <span className="pv-timelapse-image-stack">
+              <img src={activeImage.imageUrl} alt={activeImage.caption || activeImage.stageLabel || projectTitle} className="pv-timelapse-image" />
+
+              {previousImage?.imageUrl && isCrossfading && (
+                <img src={previousImage.imageUrl} alt="" className="pv-timelapse-image pv-timelapse-image-previous" aria-hidden="true" />
+              )}
+            </span>
           </button>
         ) : (
           <div className="pv-detail-image-placeholder d-flex align-items-center justify-content-center">
