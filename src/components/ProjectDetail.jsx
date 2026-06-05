@@ -89,7 +89,7 @@ const ProjectDetail = function () {
       <MyNavbar />
 
       <section className="pv-project-detail py-5">
-        <Container className="py-md-4">
+        <Container fluid className="pv-detail-container px-4 px-xxl-5 py-md-4">
           <Link to="/gallery" className="pv-back-link d-inline-flex align-items-center gap-2 mb-4">
             <ArrowLeft size={18} />
             Back to Gallery
@@ -116,7 +116,7 @@ const ProjectDetail = function () {
               </div>
 
               <Row className="g-4 align-items-start">
-                <Col lg={8}>
+                <Col lg={8} xxl={9}>
                   {mainImage ? (
                     <button type="button" className="pv-image-button" onClick={() => setSelectedImage(mainImage)}>
                       <img src={mainImage.imageUrl} alt={project.title} className="pv-detail-main-image w-100" />
@@ -177,7 +177,7 @@ const ProjectDetail = function () {
                   <TimelapseSlider images={timelapseImages} projectTitle={project.title} onImageClick={setSelectedImage} />
                 </Col>
 
-                <Col lg={4}>
+                <Col lg={4} xxl={3} className="pv-detail-sidebar">
                   <div className="pv-detail-panel p-4 mb-4">
                     <p className="pv-panel-label mb-3">Pipeline Status</p>
 
