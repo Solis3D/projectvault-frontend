@@ -13,7 +13,7 @@ const FeaturedProjects = function () {
   useEffect(() => {
     const getFeaturedProjects = async function () {
       try {
-        const response = await fetch(`${API_URL}/projects/featured?page=0&size=3`);
+        const response = await fetch(`${API_URL}/projects/featured?page=0&size=6`);
 
         if (!response.ok) {
           throw new Error("Errore nel caricamento dei progetti featured!");
@@ -63,7 +63,7 @@ const FeaturedProjects = function () {
         {!isLoading && !error && featuredProjects.length > 0 && (
           <Row className="g-4">
             {featuredProjects.map((project) => (
-              <Col xs={12} md={4} key={project.id}>
+              <Col xs={12} md={6} lg={4} key={project.id}>
                 <ProjectCard project={project} />
               </Col>
             ))}
