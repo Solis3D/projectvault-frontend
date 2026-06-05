@@ -230,7 +230,7 @@ const ProjectDetail = function () {
                     <div className="pv-detail-info-row">
                       <span>Artist</span>
                       {project.ownerAvatarUrl && (
-                        <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-2" />
+                        <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-1" />
                       )}
                       <strong>{project.ownerUsername}</strong>
                     </div>
