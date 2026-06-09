@@ -388,7 +388,7 @@ textarea {
 }
 
 .pv-detail-meta {
-  font-size: 1.05rem;
+  font-size: 1.4rem;
 }
 
 .pv-detail-container {
@@ -459,6 +459,15 @@ textarea {
 .pv-detail-artist-avatar {
   width: 32px;
   height: 32px;
+  object-fit: cover;
+  object-position: center 20%;
+  border: 1px solid var(--pv-border);
+  background-color: var(--pv-surface-high);
+}
+
+.pv-detail-artist-avatar-big {
+  width: 62px;
+  height: 60px;
   object-fit: cover;
   object-position: center 20%;
   border: 1px solid var(--pv-border);
@@ -643,6 +652,12 @@ textarea {
   color: var(--pv-text-muted);
   font-family: var(--pv-mono-font);
   font-size: 0.78rem;
+  text-transform: uppercase;
+}
+.pv-author-label {
+  color: var(--pv-text-muted);
+  font-family: var(--pv-mono-font);
+  font-size: 1rem;
   text-transform: uppercase;
 }
 

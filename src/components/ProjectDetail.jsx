@@ -112,7 +112,11 @@ const ProjectDetail = function () {
                 </div>
 
                 <h1 className="pv-detail-title mb-3">{project.title}</h1>
-                <p className="pv-detail-meta mb-0">by {project.ownerUsername}</p>
+                <h5 className="pv-author-label mt-4">Author</h5>
+                <div className=" d-flex align-items-end">
+                  <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar-big rounded-2 me-2" />
+                  <p className="pv-detail-meta mb-0 ms-1">{project.ownerUsername}</p>
+                </div>
               </div>
 
               <Row className="g-4 align-items-start">
@@ -229,10 +233,12 @@ const ProjectDetail = function () {
 
                     <div className="pv-detail-info-row">
                       <span>Artist</span>
-                      {project.ownerAvatarUrl && (
-                        <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-1" />
-                      )}
-                      <strong>{project.ownerUsername}</strong>
+                      <div className=" d-flex gap-2 align-items-center">
+                        {project.ownerAvatarUrl && (
+                          <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-1" />
+                        )}
+                        <strong>{project.ownerUsername}</strong>
+                      </div>
                     </div>
 
                     <div className="pv-detail-info-row">
