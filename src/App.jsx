@@ -13,6 +13,7 @@ import AuthProvider from "./contexts/AuthProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
 import GuestRoute from "./components/GuestRoute";
 import ProjectManager from "./components/ProjectManager";
+import ArtistProfile from "./components/ArtistProfile";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/projects/:projectId" element={<ProjectDetail />} />
+              <Route path="/artists/:username" element={<ArtistProfile />} />
               <Route
                 path="/login"
                 element={

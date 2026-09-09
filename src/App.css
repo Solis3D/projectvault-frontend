@@ -1187,6 +1187,16 @@ textarea {
   font-size: 1.25rem;
 }
 
+.pv-artist-link {
+  color: var(--pv-text);
+}
+
+.pv-artist-link:hover,
+.pv-artist-link:hover strong,
+.pv-artist-link:hover .pv-detail-meta {
+  color: var(--pv-accent);
+}
+
 @media (max-width: 991px) {
   .pv-admin-project-row {
     grid-template-columns: 76px 1fr;

@@ -112,11 +112,14 @@ const ProjectDetail = function () {
                 </div>
 
                 <h1 className="pv-detail-title mb-3">{project.title}</h1>
+
                 <h5 className="pv-author-label mt-4">Author</h5>
-                <div className=" d-flex align-items-end">
-                  <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar-big rounded-2 me-2" />
-                  <p className="pv-detail-meta mb-0 ms-1">{project.ownerUsername}</p>
-                </div>
+
+                <Link to={`/artists/${project.ownerUsername}`} className="pv-artist-link d-inline-flex align-items-center gap-2">
+                  {project.ownerAvatarUrl && <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar-big rounded-2" />}
+
+                  <span className="pv-detail-meta">{project.ownerUsername}</span>
+                </Link>
               </div>
 
               <Row className="g-4 align-items-start">
@@ -233,12 +236,14 @@ const ProjectDetail = function () {
 
                     <div className="pv-detail-info-row">
                       <span>Artist</span>
-                      <div className=" d-flex gap-2 align-items-center">
+
+                      <Link to={`/artists/${project.ownerUsername}`} className="pv-artist-link d-flex gap-2 align-items-center">
                         {project.ownerAvatarUrl && (
-                          <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle mx-1" />
+                          <img src={project.ownerAvatarUrl} alt={project.ownerUsername} className="pv-detail-artist-avatar rounded-circle" />
                         )}
+
                         <strong>{project.ownerUsername}</strong>
-                      </div>
+                      </Link>
                     </div>
 
                     <div className="pv-detail-info-row">
